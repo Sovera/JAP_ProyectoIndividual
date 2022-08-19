@@ -1,3 +1,13 @@
+function verificarCuenta(){
+    let user = localStorage.getItem("user")
+    if (user==""){
+        alert("Debe iniciar sesion para acceder a la web");
+        window.location="login.html"
+    }
+}
+
+
+
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
