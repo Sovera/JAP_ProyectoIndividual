@@ -1,7 +1,7 @@
 
 let productsArray = [];
 
-function showCategoriesList(array){
+function MostrarListaProducts(array){
     let htmlContentToAppend = "";
 
     for(let i = 0; i < array.length; i++){ 
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         if (resultObj.status === "ok")
         {
             categoriesArray = resultObj.data.products;
-            showCategoriesList(categoriesArray);
+            MostrarListaProducts(categoriesArray);
         }
     });
 });
