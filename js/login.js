@@ -17,10 +17,11 @@ function validacion(){
     let usuario=document.getElementById("Usuario").value;
     let password1=document.getElementById("password1").value;
     if(usuario==="" || password1===""){
-       alert()
+       alert("Faltan datos");
     }else{
         location.href="portada.html";
-        alert()
+        alert("Bievenido");
+        localStorage.setItem("user")=usuario;
     }
 
 }
