@@ -20,7 +20,7 @@ function validacion(){
        alert("Faltan datos");
     }else{
         location.href="portada.html";
-        alert("Bievenido");
+        alert("Bievenido " +$usuario);
         localStorage.setItem("user")=usuario;
     }
 
