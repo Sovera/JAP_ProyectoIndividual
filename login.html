@@ -5,16 +5,17 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
-  
+  <!--Script google-->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="297697359416-oh8l3pe912gmrp21n9necv2t7fb632u5.apps.googleusercontent.com">
+  <!--Script google-->
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
   <link rel="stylesheet" href="css/owl.carousel.min.css">
-  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <!-- Style -->
   <link rel="stylesheet" href="css/style.css">
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -49,8 +50,9 @@
                 <span class="text-center my-3 d-block">o</span>
                 
                 <div class="">
-
-                <a href="#" class="btn btn-block py-2 btn-google"><span class="icon-google mr-3"></span> Iniciar sesion con Google</a>
+                  <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark">
+                <a href="#" class="g-signin2 btn btn-block py-2 btn-google"><span class="icon-google mr-3"></span> Iniciar sesion con Google</a>
+              </div>
                 </div>
               
             </div>
