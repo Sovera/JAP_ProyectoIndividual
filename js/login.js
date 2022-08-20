@@ -12,6 +12,12 @@ function Usuario(){
     Usuario.apellido=document.getElementById("password1").value;
     return Usuario;
 }
+function onSignIn(googleUser){
+    var profile = googleUser.getBasicProfile();
+    let usuario = profile.getName()
+    localStorage.setItem("user",usuario);
+    location.href="index.html";       
+}
 
 function validacion(){
     let usuario=document.getElementById("Usuario").value;
@@ -23,9 +29,9 @@ function validacion(){
             title: 'Faltan ingresar datos',
             showConfirmButton: false,
             timer: 1500
-          })
-       document.getElementById("Usuario").classList("error")
-       document.getElementById("password1").classList("error")
+          });
+       document.getElementById("Usuario").classList("error");
+       document.getElementById("password1").classList("error");
     }else{
         localStorage.setItem("user",usuario);
         location.href="index.html";
