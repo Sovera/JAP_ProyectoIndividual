@@ -17,11 +17,18 @@ function validacion(){
     let usuario=document.getElementById("Usuario").value;
     let password1=document.getElementById("password1").value;
     if(usuario==="" || password1===""){
-       alert("Faltan datos");
+        Swal.fire({
+            position: 'top',
+            icon: 'error',
+            title: 'Faltan ingresar datos',
+            showConfirmButton: false,
+            timer: 1500
+          })
+       document.getElementById("Usuario").classList("error")
+       document.getElementById("password1").classList("error")
     }else{
-        location.href="portada.html";
-        alert("Bievenido " +$usuario);
-        localStorage.setItem("user")=usuario;
+        localStorage.setItem("user",usuario);
+        location.href="index.html";
     }
 
 }
