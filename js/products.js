@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     getJSONData(PRODUCTS_AUTOS).then(function(resultObj){
         if (resultObj.status === "ok")
         {
-            categoriesArray = resultObj.data.products;
-            MostrarListaProducts(categoriesArray);
+            productsArray = resultObj.data.products;
+            MostrarListaProducts(productsArray);
         }
     });
 });
