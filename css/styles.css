@@ -193,3 +193,7 @@ a.custom-card:hover {
   width:70%;
   padding-left: 30%;
 }
+
+#cerrarSesion{
+  display: none;
+}

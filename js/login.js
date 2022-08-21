@@ -12,9 +12,10 @@ function Usuario(){
     Usuario.apellido=document.getElementById("password1").value;
     return Usuario;
 }
+
 function onSignIn(googleUser){
     var profile = googleUser.getBasicProfile();
-    let usuario = profile.getName()
+    let usuario = profile.getName();
     localStorage.setItem("user",usuario);
     location.href="index.html";       
 }
