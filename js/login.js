@@ -14,7 +14,7 @@ function Usuario(){
 }
 
 function onSignIn(googleUser){
-    var profile = googleUser.getBasicProfile();
+    let profile = googleUser.getBasicProfile();
     let usuario = profile.getName();
     localStorage.setItem("user",usuario);
     location.href="index.html";       
