@@ -30,7 +30,9 @@ function MostrarListaProducts(array){
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
-    getJSONData(PRODUCTS_AUTOS).then(function(resultObj){
+    let codigo=localStorage.getItem("catID");
+    let url=PRODUCTS_URL+codigo+EXT_TYPE;
+    getJSONData(url).then(function(resultObj){
         if (resultObj.status === "ok")
         {
             productsArray = resultObj.data.products;
