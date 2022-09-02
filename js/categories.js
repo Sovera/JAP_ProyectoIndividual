@@ -35,9 +35,10 @@ function sortCategories(criteria, array){
     return result;
 }
 
-function setCatID(id) {
+function setCatID(id,name) {
     localStorage.setItem("catID", id);
-    window.location = "products.html"
+    localStorage.setItem("catName", name);
+    window.location = "products.html";
 }
 
 function showCategoriesList(){

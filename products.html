@@ -39,13 +39,18 @@
     </div>
   </nav>
   <main class="pb-5 container">
+      <div class="text-center p-4">
+        <h2 id="NameCat"></h2>
+        <p class="lead"></p>
+      </div>
     <div class="container">
       <div class="row">
         <div class="col text-end text-center">
           <input type="search" placeholder="Buscador..."name="Buscador" id="Buscador">
-          <input  class="Precios" type="text" placeholder="Precio Max..." name="buscador" id="precioMax">
-          <input  class="Precios" type="text" placeholder="Precio Min..." name="buscador" id="precioMin">
+          <input  class="Precios" type="number" placeholder="Precio Max..." name="buscador" id="precioMax">
+          <input  class="Precios" type="number" placeholder="Precio Min..." name="buscador" id="precioMin">
           <button class="btn btn-dark"id="Filtrar">Filtrar</button>
+          <button class="btn btn-dark"id="Limpiar">Limpiar</button>
           <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
             <input type="radio" class="btn-check" name="options" id="sortAsc">
             <label class="btn btn-light" for="sortAsc">A-Z</label>
