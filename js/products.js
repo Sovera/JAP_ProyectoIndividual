@@ -29,14 +29,129 @@ function MostrarListaProducts(array){
     }
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
+function ProductosFiltrados(){
     let codigo=localStorage.getItem("catID");
     let url=PRODUCTS_URL+codigo+EXT_TYPE;
     getJSONData(url).then(function(resultObj){
         if (resultObj.status === "ok")
         {
             productsArray = resultObj.data.products;
-            MostrarListaProducts(productsArray);
+            let precioMax=parseInt(document.getElementById("precioMax").value);
+            let precioMin=parseInt(document.getElementById("precioMin").value);
+            if(precioMax>0 && precioMin>0){
+            arrayFiltrada=productsArray.filter(productsArray => productsArray.cost>=precioMin && productsArray.cost<=precioMax);
+            MostrarListaProducts(arrayFiltrada);
+            }else{
+                MostrarListaProducts(productsArray);
+            }
         }
+    })
+}
+
+function ProductosAsc(){
+    let codigo=localStorage.getItem("catID");
+    let url=PRODUCTS_URL+codigo+EXT_TYPE;
+    getJSONData(url).then(function(resultObj){
+        if (resultObj.status === "ok")
+        {
+            productsArray = resultObj.data.products;
+            productsAsc=productsArray.sort((a,b)=>{
+            if(a.name<b.name){
+                return -1;
+            }else if(a.name>b.name){
+                return 1;
+            }else{
+                return 0
+            }
     });
+            MostrarListaProducts(productsAsc);
+        }
+    })
+}
+
+function ProductosDesc(){
+    let codigo=localStorage.getItem("catID");
+    let url=PRODUCTS_URL+codigo+EXT_TYPE;
+    getJSONData(url).then(function(resultObj){
+        if (resultObj.status === "ok")
+        {
+            productsArray = resultObj.data.products;
+            productsDesc=productsArray.sort((a,b)=>{
+            if(a.name>b.name){
+                return -1;
+            }else if(a.name<b.name){
+                return 1;
+            }else{
+                return 0
+            }
+    });
+            MostrarListaProducts(productsDesc);
+        }
+    })
+}
+
+function ProductosImpo(){
+    let codigo=localStorage.getItem("catID");
+    let url=PRODUCTS_URL+codigo+EXT_TYPE;
+    getJSONData(url).then(function(resultObj){
+        if (resultObj.status === "ok")
+        {
+            productsArray = resultObj.data.products;
+            productsImpo=productsArray.sort((a,b)=>{
+                return b.soldCount-a.soldCount;
+            })
+            MostrarListaProducts(productsImpo);
+        }
+    })
+}
+
+function Buscador(){
+    let codigo=localStorage.getItem("catID");
+    let url=PRODUCTS_URL+codigo+EXT_TYPE;
+    getJSONData(url).then(function(resultObj){
+        if (resultObj.status === "ok")
+            {
+                productsArray = resultObj.data.products;
+                let buscador=document.getElementById("Buscador").value;
+                let arrayBuscador=productsArray.filter(productsArray =>{ 
+                return productsArray.name.toLowerCase().indexOf(buscador.toLowerCase())>-1 || productsArray.description.toLowerCase().indexOf(buscador.toLowerCase())>-1;
+                })
+                MostrarListaProducts(arrayBuscador);
+                console.log(arrayBuscador)
+}
+    })
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+    let codigo=localStorage.getItem("catID");
+    let url=PRODUCTS_URL+codigo+EXT_TYPE;
+    getJSONData(url).then(function(resultObj){
+        if (resultObj.status === "ok")
+            {
+                productsArray = resultObj.data.products;
+                MostrarListaProducts(productsArray);
+            }
+
+        });
+
+    document.getElementById("Filtrar").addEventListener("click",()=>{
+            ProductosFiltrados();
+        })
+
+    document.getElementById("sortAsc").addEventListener("click",()=>{
+            ProductosAsc();
+        })
+        
+    document.getElementById("sortDesc").addEventListener("click",()=>{
+            ProductosDesc();
+        })
+
+    document.getElementById("sortByCount").addEventListener("click",()=>{
+            ProductosImpo();
+        })
+
+    document.getElementById("Buscador").addEventListener("keyup",()=>{
+            Buscador();
+        })
+        
 });

@@ -39,6 +39,23 @@
     </div>
   </nav>
   <main class="pb-5 container">
+    <div class="container">
+      <div class="row">
+        <div class="col text-end text-center">
+          <input type="search" placeholder="Buscador..."name="Buscador" id="Buscador">
+          <input  class="Precios" type="text" placeholder="Precio Max..." name="buscador" id="precioMax">
+          <input  class="Precios" type="text" placeholder="Precio Min..." name="buscador" id="precioMin">
+          <button class="btn btn-dark"id="Filtrar">Filtrar</button>
+          <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
+            <input type="radio" class="btn-check" name="options" id="sortAsc">
+            <label class="btn btn-light" for="sortAsc">A-Z</label>
+            <input type="radio" class="btn-check" name="options" id="sortDesc">
+            <label class="btn btn-light" for="sortDesc">Z-A</label>
+            <input type="radio" class="btn-check" name="options" id="sortByCount" checked>
+            <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"></i></label>
+          </div>
+        </div>
+      </div>
     <div class="container" id="products">
     </div>
   </main>
