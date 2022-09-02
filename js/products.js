@@ -113,6 +113,7 @@ function Limpiar(){
 
 document.addEventListener("DOMContentLoaded",()=>{
     let codigo=localStorage.getItem("catID");
+    let urlcat=CATEGORIES_URL;
     let url=PRODUCTS_URL+codigo+EXT_TYPE;
     getJSONData(url).then(function(resultObj){
         if (resultObj.status === "ok")
@@ -120,7 +121,20 @@ document.addEventListener("DOMContentLoaded",()=>{
                 productsArray = resultObj.data.products;
                 MostrarListaProducts(productsArray);
             }
+getJSONData(urlcat).then(function(resultObj){
+                if (resultObj.status === "ok")
+                    {
+                        catArray = resultObj.data.products;
+                        for (cat in catArray) {
+                                if(cat.id = codigo){
+                                    localStorage.setItem("catName", cat.name);
+                                    
+                                }
+                            }
 
+                    }
+        
+                });
         });
         NameCat();
 

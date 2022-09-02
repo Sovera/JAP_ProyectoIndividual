@@ -200,3 +200,10 @@ a.custom-card:hover {
 #Buscador{
   width:54%;
 }
+.cerrarSesion{
+  background-color: #9b5252;
+}
+.cerrarSesion:hover{
+  background-color: #c22323;
+  border-color: #680202;
+}
