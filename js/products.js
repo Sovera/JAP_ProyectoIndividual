@@ -21,9 +21,10 @@ function MostrarListaProducts(array){
                         <h4>`+ products.name +`</h4> 
                         <p> `+ products.description +`</p> 
                         </div>
-                        <small class="text-muted">` + products.currency +" "+products.cost+ `</small> 
+                        
+                        <small class="text-muted"> ` + products.currency +" "+products.cost+ `</small> 
                     </div>
-
+                    <p class="mb-1 totalVen"> Total vendidos: ${products.soldCount}</p>
                 </div>
             </div>
         </div>

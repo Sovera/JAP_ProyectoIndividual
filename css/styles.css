@@ -207,3 +207,21 @@ a.custom-card:hover {
   background-color: #c22323;
   border-color: #680202;
 }
+.totalVen{
+  margin-left: 80%;
+  margin-top: 10%;
+  color: #111111ab;
+  letter-spacing: 0.7px;
+}
+.importante{
+  font-weight: 600;
+}
+.barraFiltros{
+  background-color: rgba(236, 236, 236, 0.671);
+  border-radius: 50px;
+  padding-top: 30px;
+  margin-bottom: 10px;
+}
+.barraFiltros:hover{
+  background-color: #e9e9e9;
+}
