@@ -10,7 +10,7 @@ function MostrarListaProducts(array){
     for(let i = 0; i < array.length; i++){ 
         let products = array[i];
         htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action">
+        <div onclick="setProduID(${products.id})" class="list-group-item list-group-item-action">
             <div class="row">
                 <div class="col-3">
                     <img src="` + products.image + `" alt="product image" class="img-thumbnail">
@@ -31,6 +31,11 @@ function MostrarListaProducts(array){
         `
         document.getElementById("products").innerHTML = htmlContentToAppend; 
     }
+}
+
+function setProduID(id) {
+    localStorage.setItem("productID", id);
+    window.location = "product-info.html";
 }
 
 function ProductosFiltrados(productsArray){
@@ -120,24 +125,14 @@ document.addEventListener("DOMContentLoaded",()=>{
         if (resultObj.status === "ok")
             {
                 productsArray = resultObj.data.products;
+                productsObj= resultObj.data;
+                CatName=productsObj.catName;
+                localStorage.setItem("catName", CatName);
                 MostrarListaProducts(productsArray);
+                NameCat();
             }
-getJSONData(urlcat).then(function(resultObj){
-                if (resultObj.status === "ok")
-                    {
-                        catArray = resultObj.data.products;
-                        for (cat in catArray) {
-                                if(cat.id = codigo){
-                                    localStorage.setItem("catName", cat.name);
-                                    
-                                }
-                            }
-
-                    }
-        
-                });
         });
-        NameCat();
+        
 
     document.getElementById("Filtrar").addEventListener("click",()=>{
         precioMax=parseInt(document.getElementById("precioMax").value);
