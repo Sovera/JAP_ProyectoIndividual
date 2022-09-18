@@ -15,11 +15,19 @@ function MostrarProducto(productsInfo) {
 function MandarComentario(){
   let texto=document.getElementById("Opinion").value;
   let usuario=localStorage.getItem(`user`);
-  let score=document.getElementsByName("estrellas").value;
+  let score=0;
+  let radios = document.getElementsByName('estrellas');
+   for (let i = 0; i <= radios.length; i++) {
+     if (radios[i].checked) {
+       score=radios[i].value;
+       break;
+}
+   }
+   console.log(score);
   let fecha= new Date;
   let dia= fecha.getDate();
   let mes= fecha.getMonth()+1;
-  let año= fecha.getYear();
+  let año= fecha.getFullYear();
   let hora= fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
   let fechaCompl=año+"-"+mes+"-"+dia+" "+hora;
   let obj={};
@@ -28,7 +36,7 @@ function MandarComentario(){
   obj.score=score;
   obj.dateTime=fechaCompl;
   productsComents.push(obj);
-  MostrarComentarios(productsComents);
+  
 }
 
 function MostrarComentarios(array){
@@ -85,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("enviarComen").addEventListener("click", function() {
-    MostrarComentarios(productsComents);
     MandarComentario();
+    MostrarComentarios(productsComents);
   });
 });
