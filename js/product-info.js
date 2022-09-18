@@ -1,29 +1,51 @@
+let productsComents=[];
+
+
 function MostrarProducto(productsInfo) {
     document.getElementById("Name").innerHTML=productsInfo.name;
     document.getElementById("Precio").innerHTML=+productsInfo.cost;
     document.getElementById("Currency").innerHTML=productsInfo.currency;
     document.getElementById("Descripcion").innerHTML=productsInfo.description;
     document.getElementById("Imagen").src=productsInfo.images[0];
-    //document.getElementById("Imagen2").src=productsInfo.images[1];
-    //document.getElementById("Imagen3").src=productsInfo.images[2];
+    document.getElementById("Imagen2").src=productsInfo.images[1];
+    document.getElementById("Imagen3").src=productsInfo.images[2];
     
+}
+
+function MandarComentario(){
+  let texto=document.getElementById("Opinion").value;
+  let usuario=localStorage.getItem(`user`);
+  let score=document.getElementsByName("estrellas").value;
+  let fecha= new Date;
+  let dia= fecha.getDate();
+  let mes= fecha.getMonth()+1;
+  let año= fecha.getYear();
+  let hora= fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+  let fechaCompl=año+"-"+mes+"-"+dia+" "+hora;
+  let obj={};
+  obj.user=usuario;
+  obj.description=texto;
+  obj.score=score;
+  obj.dateTime=fechaCompl;
+  productsComents.push(obj);
+  MostrarComentarios(productsComents);
 }
 
 function MostrarComentarios(array){
   let htmlContentToAppend = "";
 
-  for(let i = 0; i < array.length; i++){ 
+  for(let i = 0; i <= array.length; i++){ 
       let coments = array[i];
       htmlContentToAppend += `
       <div class="cajaComents">
       <div>
-        <span><b>${coments.user} </b></span>
+        <span><b> ${coments.user} </b></span>
       </div>
       <p>
 ${coments.description}
       </p>
       <span id="score">
-        ${coments.score}
+      ${MostrarScore(coments.score)}
       </span>
       <span class="dateTime">${coments.dateTime}</span>
     </div>
@@ -32,30 +54,17 @@ ${coments.description}
   }
 }
 
-/*function MostrarScore(array){
-  for(let i = 0; i < array.length; i++){
-    let coments = array[i];
-    let cont=0;
-    if(cont <= coments.score){
-      htmlContentToAppend += `<span class="fa fa-star checked"></span>`
-      cont++;
-    }else{     
-    htmlContentToAppend += `<span class="fa fa-star"></span>`
-    cont++;}
+function MostrarScore(puntos){
+  let estrellas="";
+  for(let i = 1; i <= 5; i++){
+    if(i <= puntos){
+      estrellas+=`<span class="bi bi-star-fill naranja"></span>`
+    }else{  
+      estrellas+=`<span class="bi bi-star naranja"></span>`   
 }
-
-
-*/
-
-
-
-
-
-
-
-
-
-
+  }
+  return estrellas;
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   let codigo = localStorage.getItem("productID");
@@ -73,5 +82,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       MostrarComentarios(productsComents);
     }
+  });
+
+  document.getElementById("enviarComen").addEventListener("click", function() {
+    MostrarComentarios(productsComents);
+    MandarComentario();
   });
 });
