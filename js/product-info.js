@@ -1,4 +1,5 @@
 let productsComents=[];
+let productsArray=[];
 
 
 function MostrarProducto(productsInfo) {
@@ -62,6 +63,42 @@ ${coments.description}
   }
 }
 
+function arraySinProductoMain(productsArray){
+     let productID=localStorage.getItem("productID")
+     arrayFiltrada=productsArray.filter(productsArray => productsArray.id!=productID);
+     MostrarRelacionados(arrayFiltrada);
+ }
+
+function MostrarRelacionados(array){
+
+  let htmlContentToAppend="";
+
+for(let i=0; i<= array.length; i++){
+  let products = array[i];
+  htmlContentToAppend +=`
+  <div class="col mb-5">
+  <div class="card h-10">
+      <img class="card-img-top" src="` + products.image + `" alt="..." />
+          <div class="card-body p-4">
+              <div class="text-center">
+                  <h5 class="fw-bolder">`+ products.name +`</h5>
+                    ` + products.currency +" "+products.cost+ `
+              </div>
+          </div>
+  <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+      <div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="setProduID(${products.id})">Ver Producto</a></div>
+  </div>
+</div>
+</div>`
+document.getElementById("containerRelacionados").innerHTML= htmlContentToAppend;
+}
+}
+
+function setProduID(id) {
+  localStorage.setItem("productID", id);
+  window.location = "product-info.html";
+}
+
 function MostrarScore(puntos){
   let estrellas="";
   for(let i = 1; i <= 5; i++){
@@ -76,8 +113,10 @@ function MostrarScore(puntos){
 
 document.addEventListener("DOMContentLoaded", () => {
   let codigo = localStorage.getItem("productID");
+  let products=localStorage.getItem("catID");
   let url = PRODUCT_INFO_URL + codigo + EXT_TYPE;
   let urlcoments = PRODUCT_INFO_COMMENTS_URL + codigo + EXT_TYPE;
+  let urlProducts = PRODUCTS_URL+products+EXT_TYPE;
   getJSONData(url).then(function (resultObj) {
     if (resultObj.status === "ok") {
       productsInfo = resultObj.data;
@@ -91,6 +130,14 @@ document.addEventListener("DOMContentLoaded", () => {
       MostrarComentarios(productsComents);
     }
   });
+  getJSONData(urlProducts).then(function(resultObj){
+    if (resultObj.status === "ok")
+        {
+            productsArray = resultObj.data.products;
+            console.log(productsArray);
+            arraySinProductoMain(productsArray)
+        }
+    });
 
   document.getElementById("enviarComen").addEventListener("click", function() {
     MandarComentario();

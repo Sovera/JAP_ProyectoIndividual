@@ -41,8 +41,4 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catName", "Muebles");
         window.location = "products.html";
     });
-    document.getElementById("cerrarSesion").addEventListener("click",()=>{
-        localStorage.removeItem("user")
-        window.location.reload()
-        });
 });

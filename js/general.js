@@ -7,4 +7,9 @@ function mostrarUser(){
 
 document.addEventListener('DOMContentLoaded',()=>{
 mostrarUser();
+
+document.getElementById("cerrarSesion").addEventListener("click",()=>{
+    localStorage.removeItem("user")
+    window.location="login.html";
+    });
 })

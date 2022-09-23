@@ -34,9 +34,15 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="my-profile.html" id="nombreUser"></a>
+            <div class="menuContainer">
+              <a class="nav-link nombreUser" id="nombreUser"></a>
+                  <div class="userMenu navbar-dark bg-dark">
+                      <a class="option nav-link" href="my-profile.html">Mi perfil</a>
+                      <a class="option nav-link" href="cart.html">Mi carrito</a>
+                      <a class="option nav-link" id="cerrarSesion">Cerrar sesion</a>
+                  </div>
+            </div>
           </li>
-          <button id="cerrarSesion" class="btn cerrarSesion btn-dark">Cerrar Sesion</button>
         </ul>
       </div>
     </div>
@@ -80,7 +86,7 @@
               
               
                 <div id="conteinerProdu" class="col-md-6">
-                  <h1 class="display-5 fw-bolder" id="Name">Shop item template</h1>
+                  <h1 class="display-5 fw-bolder" id="Name"></h1>
                   <div class="fs-5 mb-5">
                     <span><b>Precio:</b></span>
                     <span id="Currency"></span>
@@ -98,8 +104,20 @@
           </div>
       </div>
   </section>
-  <!-- Related items section-->
-  <section class="py-5 bg-light">
+  <section class="py-5 bg-light border-top border-1 border-bottom">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4 ">Related products</h2>
+
+<div class="containerRelacionados">
+          <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xxl-4 justify-content-center" id="containerRelacionados">
+  
+  
+          </div>
+</div>
+    </div>
+</section>
+  <!-- Coments items section-->
+  <section class="py-5 bg-body">
     <h1 class="text-center">Comentarios</h1>
       <div id="Comentarios" class="container px-4 px-lg-5 mt-5">
         
