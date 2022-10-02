@@ -63,18 +63,12 @@ ${coments.description}
   }
 }
 
-function arraySinProductoMain(productsArray){
-     let productID=localStorage.getItem("productID")
-     arrayFiltrada=productsArray.filter(productsArray => productsArray.id!=productID);
-     MostrarRelacionados(arrayFiltrada);
- }
-
 function MostrarRelacionados(array){
 
   let htmlContentToAppend="";
 
-for(let i=0; i<= array.length; i++){
-  let products = array[i];
+for(let i=0; i<= array.relatedProducts.length; i++){
+  let products = array.relatedProducts[i];
   htmlContentToAppend +=`
   <div class="col mb-5">
   <div class="card h-10">
@@ -82,7 +76,6 @@ for(let i=0; i<= array.length; i++){
           <div class="card-body p-4">
               <div class="text-center">
                   <h5 class="fw-bolder">`+ products.name +`</h5>
-                    ` + products.currency +" "+products.cost+ `
               </div>
           </div>
   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -130,12 +123,12 @@ document.addEventListener("DOMContentLoaded", () => {
       MostrarComentarios(productsComents);
     }
   });
-  getJSONData(urlProducts).then(function(resultObj){
+  getJSONData(url).then(function(resultObj){
     if (resultObj.status === "ok")
         {
-            productsArray = resultObj.data.products;
+            productsArray = resultObj.data;
             console.log(productsArray);
-            arraySinProductoMain(productsArray)
+            MostrarRelacionados(productsArray);
         }
     });
 
