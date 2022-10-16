@@ -9,6 +9,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link href="css/carrito.css" rel="stylesheet">
 </head>
 
 <body>
@@ -45,10 +46,146 @@
   </nav>
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
-    </div>
+      <body class="bg-light">
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-10 col-11 mx-auto">
+        <div class="row mt-5 gx-3">
+        <!-- Div productos -->
+        <div class="col-md-12 col-lg-8 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow" id="ContenedorProductos">
+        <h2 class="py-4 font-weight-bold">Carrito</h2>
+        <div class="card p-4">
+        <div class="row">
+        <!-- cart images div -->
+        <div class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
+        <img src="images/img2.png" class="img-fluid" alt="cart img">
+        </div>
+        
+        
+        
+        
+        <!-- cart product details -->
+        <div class="col-md-7 col-11 mx-auto px-4 mt-2">
+        <div class="row">
+        <!-- product name  -->
+        <div class="col-6 card-title">
+        <h1 class="mb-4 product_name">Producto</h1>
+        </div>
+        <!-- quantity inc dec -->
+        <div class="col-6">
+        <ul class="pagination justify-content-end set_quantity">
+        <li class="page-item">
+        <button class="page-link" onclick="DecrecerNumero('textbox','itemval')">
+        <i class="fas fa-minus"></i> </button>
+        </li>
+        <li class="page-item"><input type="number" name="" class="page-link" value="0" id="textbox" >
+        </li>
+        <li class="page-item">
+        <button class="page-link" onclick="IncrementarNumero('textbox','itemval')"> <i class="fas fa-plus"></i></button>
+        </li>
+        </ul>
+        </div>
+        </div>
+        <!-- //remover move and price -->
+        <div class="row">
+        <div class="col-4 d-flex justify-content-end price_money">
+        <h3>$<span id="itemval">0.00 </span></h3>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <hr/>
+        <!-- 2nd cart product -->
+        <div class="card p-4">
+        <div class="row">
+        <!-- cart images div -->
+        <div class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
+        <img src="images/img3.png" class="img-fluid" alt="cart img">
+        </div>
+        
+        
+        
+        
+        <!-- cart product details -->
+        <div class="col-md-7 col-11 mx-auto px-4 mt-2">
+        <div class="row">
+        <!-- product name  -->
+        <div class="col-6 card-title">
+        <h1 class="mb-4 product_name">Producto</h1>
+        </div>
+        <!-- quantity inc dec -->
+        <div class="col-6">
+        <ul class="pagination justify-content-end set_quantity">
+        <li class="page-item">
+        <button class="page-link " onclick="DecrecerNumero('textbox1','itemval1')"> <i class="fas fa-minus"></i> </button>
+        </li>
+        <li class="page-item"><input type="number" name="" class="page-link" value="0" id="textbox1" >
+        </li>
+        <li class="page-item">
+        <button class="page-link" onclick="IncrementarNumero('textbox1','itemval1')"> <i class="fas fa-plus"></i></button>
+        </li>
+        </ul>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-4 d-flex justify-content-end price_money">
+        <h3>$<span id="itemval1">0.00 </span> </h3>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <!-- div derecho -->
+        <div class="col-md-12 col-lg-4 col-11 mx-auto mt-lg-0 mt-md-5">
+        <div class="right_side p-3 shadow bg-white">
+        <h2 class="product_name mb-5">Precio</h2>
+        <div class="price_indiv d-flex justify-content-between" id="montoDeProductos">
+        </div>
+        <hr>
+        <h2 class="product_name mb-5">Tipo de envio</h2>
+        <div class="price_indiv d-flex justify-content-between ">
+             <span>
+               <input type="radio" name="Envio" id="Premium">Premium 2 a 5 dias(15%)
+             </span>
+             <span>
+               <input type="radio" name="Envio" id="Express">Express 5 a 8 dias(7%)
+             </span>
+             <span>
+               <input type="radio" name="Envio" id="Standard">Standard 12 a 15 dias(5%)
+             </span>
+            </div>
+            <hr>
+            <h2 class="product_name mb-5">Direccion de envio</h2>
+             <div class="price_indiv">
+              <p>
+                Calle<input type="text" name="Calle" id="Calle">
+              </p>
+              <p>
+                Numero<input type="text" name="Numero" id="Numero">
+              </p>
+              <p>
+                Esquina<input type="text" name="Esquina" id="Esquina">
+              </p>
+             </div>
+           
+        
+        <hr>
+
+
+
+        <div class="total-amt d-flex justify-content-between font-weight-bold">
+        <p>Precio total</p>
+        <p>USD <span id="total_cart_amt">0.00</span></p>
+        </div>
+        <button class="btn btn-primary text-uppercase">Comprar</button>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
   </main>
   <footer class="text-muted">
     <div class="container">

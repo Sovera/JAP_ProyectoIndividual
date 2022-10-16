@@ -114,23 +114,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (resultObj.status === "ok") {
       productsInfo = resultObj.data;
       MostrarProducto(productsInfo);
+      MostrarRelacionados(productsInfo);
     }
   });
   getJSONData(urlcoments).then(function (resultObj) {
     if (resultObj.status === "ok") {
       productsComents = resultObj.data;
-
       MostrarComentarios(productsComents);
     }
   });
-  getJSONData(url).then(function(resultObj){
-    if (resultObj.status === "ok")
-        {
-            productsArray = resultObj.data;
-            console.log(productsArray);
-            MostrarRelacionados(productsArray);
-        }
-    });
+
 
   document.getElementById("enviarComen").addEventListener("click", function() {
     MandarComentario();
