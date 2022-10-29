@@ -1,6 +1,3 @@
-var product_total_amt = document.getElementById('product_total_amt');
-var shipping_charge = document.getElementById('shipping_charge');
-var total_cart_amt = document.getElementById('total_cart_amt');
 let productsCarrito = [];
 
 
@@ -56,8 +53,22 @@ let unidad= document.getElementById(textbox).value
 let precioTotal= precio * parseInt(unidad);
 let htmlContentToAppend2 = precioTotal;
 document.getElementById(productoTotal).innerHTML = htmlContentToAppend2;
+}
 
+function calcularSubtotalCarrito(array){
+    for(let i = 0; i < array.length; i++){
+        
+    }
+    }
 
+function OpcionTarjeta(){
+ document.getElementById("metodoTarejeta").style.display="block"
+ document.getElementById("metodoTransferencia").style.display="none"
+}
+
+function OpcionTransferencia(){
+document.getElementById("metodoTransferencia").style.display="block"
+document.getElementById("metodoTarejeta").style.display="none"
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -67,12 +78,13 @@ document.addEventListener("DOMContentLoaded",()=>{
         if (resultObj.status === "ok")
             {
                 productsCarrito = resultObj.data.articles;
-                console.log(productsCarrito)
                 cargarCarrito(productsCarrito);
             }
         });
-
-        document.getElementById("sortAsc").addEventListener("click", function(){
-            sortAndShowCategories(ORDER_ASC_BY_NAME);
+        document.getElementById("Tarjeta").addEventListener("click", function(){
+            OpcionTarjeta();
+        });
+        document.getElementById("Transferencia").addEventListener("click", function(){
+            OpcionTransferencia();
         });
     })
