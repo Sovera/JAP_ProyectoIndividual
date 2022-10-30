@@ -1,4 +1,5 @@
 let productsCarrito = [];
+let precioTotal=0;
 
 
 function cargarCarrito(array){
@@ -53,11 +54,29 @@ let unidad= document.getElementById(textbox).value
 let precioTotal= precio * parseInt(unidad);
 let htmlContentToAppend2 = precioTotal;
 document.getElementById(productoTotal).innerHTML = htmlContentToAppend2;
+calcularSubtotalCarrito(productsCarrito)
 }
 
-function calcularSubtotalCarrito(array){
+function calcularSubtotalCarrito(array){ 
     for(let i = 0; i < array.length; i++){
-        
+        precio=document.getElementById("productoTotal"+i).textContent
+        precioInt= parseInt(precio)
+        precioTotal=0
+        precioTotal= precioInt+precioTotal
+        document.getElementById("SubtotalCarrito").innerHTML=precioTotal
+    }
+    if(document.getElementById("Premium").checked===true){
+    precioTotal=precioTotal+precioTotal*(15/100)
+    document.getElementById("SubtotalCarrito").innerHTML=precioTotal
+    document.getElementById("PrecioEnvio").innerHTML=precioTotal*(15/100)
+    }if(document.getElementById("Express").checked===true){
+        precioTotal=precioTotal+precioTotal*(7/100)
+        document.getElementById("SubtotalCarrito").innerHTML=precioTotal
+        document.getElementById("PrecioEnvio").innerHTML=precioTotal*(7/100)
+    }if(document.getElementById("Standard").checked===true){
+        precioTotal=precioTotal+precioTotal*(5/100)
+        document.getElementById("SubtotalCarrito").innerHTML=precioTotal
+        document.getElementById("PrecioEnvio").innerHTML=precioTotal*(5/100)
     }
     }
 
@@ -72,6 +91,26 @@ document.getElementById("metodoTarejeta").style.display="none"
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
+    (() => {
+    'use strict'
+      
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+  
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
+
     let codigoUser="25801";
     let url=CART_INFO_URL+codigoUser+EXT_TYPE;
     getJSONData(url).then(function(resultObj){
@@ -79,12 +118,26 @@ document.addEventListener("DOMContentLoaded",()=>{
             {
                 productsCarrito = resultObj.data.articles;
                 cargarCarrito(productsCarrito);
+                calcularSubtotalCarrito(productsCarrito);
             }
+            
         });
         document.getElementById("Tarjeta").addEventListener("click", function(){
             OpcionTarjeta();
         });
         document.getElementById("Transferencia").addEventListener("click", function(){
             OpcionTransferencia();
+        });
+        document.getElementById("Premium").addEventListener("click", function(){
+            calcularSubtotalCarrito(productsCarrito);
+        });
+        document.getElementById("Standard").addEventListener("click", function(){
+            calcularSubtotalCarrito(productsCarrito);
+        });
+        document.getElementById("Express").addEventListener("click", function(){
+            calcularSubtotalCarrito(productsCarrito);
+        });
+        document.getElementById("Comprar").addEventListener("click", function(){
+            
         });
     })

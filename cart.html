@@ -60,38 +60,51 @@
         <h2 class="product_name mb-2">Productos:</h2>
         <div class="price_indiv d-flex justify-content-between" id="montoDeProductos">
         </div>
+        <hr>
+        <div class="price_indiv d-flex justify-content-between">
+        <p>Precio de envio</p>
+        <p>USD <span id="PrecioEnvio"></span></p>
+        </div>
+        <hr>
         <div class="total-amt d-flex justify-content-between font-weight-bold">
           <p>Subtotal</p>
           <p>USD <span id="SubtotalCarrito">0</span></p>
           </div>
         <hr>
+        <form class="needs-validation" novalidate>
         <h2 class="product_name mb-4">Tipo de envio:</h2>
         
         <div class="price_indiv d-flex justify-content-between ">
              <span>
-               <input type="radio" name="Envio" id="Premium">Premium 2 a 5 dias(15%)
+               <input type="radio" class=" is-invalid" name="Envio" id="Premium" value="Premium" required>Premium 2 a 5 dias(15%)
              </span>
              <span>
-               <input type="radio" name="Envio" id="Express">Express 5 a 8 dias(7%)
+               <input type="radio" class=" is-invalid" name="Envio" id="Express" value="Express" required>Express 5 a 8 dias(7%)
              </span>
              <span>
-               <input type="radio" name="Envio" id="Standard">Standard 12 a 15 dias(5%)
+               <input type="radio" class=" is-invalid" name="Envio" id="Standard" value="Standard" required>Standard 12 a 15 dias(5%)
              </span>
             </div>
             <hr>
             <h2 class="product_name mb-3">Direccion de envio</h2>
-            <button class="btn btn-outline-danger" id="metodoDePago" data-bs-toggle="modal" data-bs-target="#ModalPago">Metodo de pago</button>
+            <a class="btn btn-outline-danger is-invalid" id="metodoDePago" data-bs-toggle="modal" data-bs-target="#ModalPago" required>Metodo de pago</a>
+            <div class="invalid-feedback">
+              Debes aceptar los términos y condiciones.
+            </div>
             <p></p>
 
              <div class="price_indiv">
               <p>
-                Calle<input type="text" name="Calle" id="Calle">
+                Calle<input type="text" class="form-control" name="Calle" id="Calle" required>
+                <div class="valid-feedback">Todo correcto</div>
+                <div class="invalid-feedback">Falta poner Calle</div>
+              </p>
+              
+              <p>
+                Numero<input type="text" class="form-control" name="Numero" id="Numero" required>
               </p>
               <p>
-                Numero<input type="text" name="Numero" id="Numero">
-              </p>
-              <p>
-                Esquina<input type="text" name="Esquina" id="Esquina">
+                Esquina<input type="text" class="form-control" name="Esquina" id="Esquina" required>
               </p>
              </div>
            
@@ -104,15 +117,17 @@
         <p>Precio total</p>
         <p>USD <span id="TotalCarrito">0.00</span></p>
         </div>
-        <button class="btn btn-primary text-uppercase">Comprar</button>
+        <button type="submit" class="btn btn-primary text-uppercase" id="Comprar">Comprar</button>
         </div>
         </div>
         </div>
         </div>
         </div>
         </div>
+      </form>
 
 <!-- Modal -->
+<form class="needs-validated" novalidate>
 <div class="modal fade" id="ModalPago" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -124,37 +139,37 @@
 
        <div class="">
          <p>
-           <input class="" type="radio" name="MetodoPago" id="Tarjeta" value="Tarjeta"><span class="product_name mb-2 p-2">Tarjeta de credito</span>
+           <input class="" type="radio" name="MetodoPago" id="Tarjeta" value="Tarjeta" required><span class="product_name mb-2 p-2">Tarjeta de credito</span>
          </p>
        </div>
 
         <div class="d-grid p-2 mb-3" id="metodoTarejeta" style="display: none;">
         <label for="NumTarjeta" class="">Numero de la tarjeta</label>
-        <input type="text" id="NumTarjeta" class="form-control">
+        <input type="text" id="NumTarjeta" class="form-control" required>
         <label for="NumSeguridad" class="">Codigo de seg.</label>
-        <input type="text" id="NumSeguridad" class="form-control">
+        <input type="text" id="NumSeguridad" class="form-control" required>
         <label for="VenTarjeta">Vencimiento(MM/AA)</label>
-        <input type="text" id="VenTarjeta" class="form-control">
+        <input type="text" id="VenTarjeta" class="form-control" required>
         </div>
 
         <p>
-          <input class="" type="radio" name="MetodoPago" id="Transferencia" value="Transferencia"><span class="product_name mb-2 p-2">Transferencia bancaria</span>
+          <input class="" type="radio" name="MetodoPago" id="Transferencia" value="Transferencia" required><span class="product_name mb-2 p-2">Transferencia bancaria</span>
         </p>
         
         <div class="d-grid p-2 mb-3" id="metodoTransferencia" style="display: none;">
         <label for="NumCuenta" class="">Numero de cuenta</label>
-        <input type="text" id="NumCuenta" class="form-control">
+        <input type="text" id="NumCuenta" class="form-control" required>
 
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
       </div>
     </div>
   </div>
 </div>
-        
+</form>
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -174,6 +189,7 @@
       <div></div>
     </div>
   </div>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="js/general.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
