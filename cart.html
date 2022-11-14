@@ -71,41 +71,61 @@
           <p>USD <span id="SubtotalCarrito">0</span></p>
           </div>
         <hr>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" id="formulario" novalidate>
         <h2 class="product_name mb-4">Tipo de envio:</h2>
         
-        <div class="price_indiv d-flex justify-content-between ">
-             <span>
-               <input type="radio" class=" is-invalid" name="Envio" id="Premium" value="Premium" required>Premium 2 a 5 dias(15%)
-             </span>
-             <span>
-               <input type="radio" class=" is-invalid" name="Envio" id="Express" value="Express" required>Express 5 a 8 dias(7%)
-             </span>
-             <span>
-               <input type="radio" class=" is-invalid" name="Envio" id="Standard" value="Standard" required>Standard 12 a 15 dias(5%)
-             </span>
+        <div class="price_indiv  ">
+              <div class="card align-items-center">
+
+              <input type="radio" class="form-control" name="Envio" id="Premium" value="Premium" required>Premium 2 a 5 dias(15%)
+              <div class="invalid-feedback">Seleccione un tipo de envio</div>
+<hr>
+              <input type="radio" class="form-control" name="Envio" id="Express" value="Express" required>Express 5 a 8 dias(7%)
+              <div class="invalid-feedback">Seleccione un tipo de envio</div>
+<hr>
+              <input type="radio" class="form-control" name="Envio" id="Standard" value="Standard" required>Standard 12 a 15 dias(5%)
+              <div class="invalid-feedback">Seleccione un tipo de envio</div>
+
+              </div>
             </div>
             <hr>
             <h2 class="product_name mb-3">Direccion de envio</h2>
-            <a class="btn btn-outline-danger is-invalid" id="metodoDePago" data-bs-toggle="modal" data-bs-target="#ModalPago" required>Metodo de pago</a>
-            <div class="invalid-feedback">
-              Debes aceptar los términos y condiciones.
+            <button type="button" class="btn btn-outline-danger" id="metodoDePago" data-bs-toggle="modal" data-bs-target="#ModalPago" required>Metodo de pago</button>
+            <div id="MetodoPagoValid" style="display: none;">
+              Metodo de pago ingresado correctamente
             </div>
+            <div id="MetodoPagoInvalid" style="display: none;">
+              Debe introducir un metodo de pago
+            </div>
+            <hr>
             <p></p>
 
              <div class="price_indiv">
-              <p>
-                Calle<input type="text" class="form-control" name="Calle" id="Calle" required>
-                <div class="valid-feedback">Todo correcto</div>
-                <div class="invalid-feedback">Falta poner Calle</div>
-              </p>
+           
+         <div>
+                 Calle<input type="text" class="form-control" name="Calle" id="Calle" required>
+                 <div class="valid-feedback">Todo correcto</div>
+                 <div class="invalid-feedback">Falta poner una Calle</div>
+               
+         </div>
               
-              <p>
-                Numero<input type="text" class="form-control" name="Numero" id="Numero" required>
-              </p>
-              <p>
-                Esquina<input type="text" class="form-control" name="Esquina" id="Esquina" required>
-              </p>
+              
+             <div>
+                 Numero<input type="text" class="form-control" name="Numero" id="Numero" required>
+                 <div class="valid-feedback">
+                   Todo correcto
+                 </div>
+                 <div class="invalid-feedback">
+                   Falta poner un Numero
+                 </div>
+             </div>
+<div>
+              
+                  Esquina<input type="text" class="form-control" name="Esquina" id="Esquina" required>
+                  <div class="valid-feedback">Todo correcto</div>
+                  <div class="invalid-feedback">Falta poner una Esquina</div>
+                
+</div>
              </div>
            
         
@@ -113,11 +133,8 @@
 
 
 
-        <div class="total-amt d-flex justify-content-between font-weight-bold">
-        <p>Precio total</p>
-        <p>USD <span id="TotalCarrito">0.00</span></p>
-        </div>
-        <button type="submit" class="btn btn-primary text-uppercase" id="Comprar">Comprar</button>
+
+        <button type="submit" class="btn btn-primary text-uppercase" id="Comprar">Finalizar compra</button>
         </div>
         </div>
         </div>
@@ -127,8 +144,8 @@
       </form>
 
 <!-- Modal -->
-<form class="needs-validated" novalidate>
 <div class="modal fade" id="ModalPago" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <form class="was-validated" novalidate>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -144,12 +161,36 @@
        </div>
 
         <div class="d-grid p-2 mb-3" id="metodoTarejeta" style="display: none;">
-        <label for="NumTarjeta" class="">Numero de la tarjeta</label>
-        <input type="text" id="NumTarjeta" class="form-control" required>
-        <label for="NumSeguridad" class="">Codigo de seg.</label>
-        <input type="text" id="NumSeguridad" class="form-control" required>
-        <label for="VenTarjeta">Vencimiento(MM/AA)</label>
-        <input type="text" id="VenTarjeta" class="form-control" required>
+ <div>
+         <label for="NumTarjeta" class="">Numero de la tarjeta</label>
+         <input type="text" id="NumTarjeta" class="form-control" required>
+         <div class="valid-feedback">
+           Todo correcto
+         </div>
+         <div class="invalid-feedback">
+           Falta poner un Numero
+         </div>
+ </div>
+<div>
+          <label for="NumSeguridad" class="">Codigo de seg.</label>
+          <input type="text" id="NumSeguridad" class="form-control" required>
+          <div class="valid-feedback">
+            Todo correcto
+          </div>
+          <div class="invalid-feedback">
+            Falta poner un Numero
+          </div>
+</div>
+        <div>
+          <label for="VenTarjeta">Vencimiento(MM/AA)</label>
+          <input type="text" id="VenTarjeta" class="form-control" required>
+          <div class="valid-feedback">
+            Todo correcto
+          </div>
+          <div class="invalid-feedback">
+            Falta poner un Numero
+          </div>
+          </div>
         </div>
 
         <p>
@@ -163,13 +204,13 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+        <button type="button" id="GuardarModal" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
       </div>
     </div>
   </div>
-</div>
 </form>
+</div>
+
   </main>
   <footer class="text-muted">
     <div class="container">

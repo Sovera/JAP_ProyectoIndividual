@@ -22,6 +22,7 @@ function onSignIn(googleUser){
 
 function validacion(){
     let usuario=document.getElementById("Usuario").value;
+    let Email=document.getElementById("Email").value;
     let password1=document.getElementById("password1").value;
     if(usuario==="" || password1===""){
         Swal.fire({
@@ -35,6 +36,7 @@ function validacion(){
        document.getElementById("password1").classList("error");
     }else{
         localStorage.setItem("user",usuario);
+        localStorage.setItem("email",Email)
         location.href="index.html";
     }
 

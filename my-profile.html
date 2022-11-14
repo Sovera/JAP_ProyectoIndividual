@@ -59,11 +59,73 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <form action="" class="needs-validation">
+    <div class="container start-50 translate-middle mt-5 p-5 shadow bg-white rounded text-center">
+      <h2 id="UserGrande"class="mb-4">Nombre de usuario</h2>
+      
+      <div class="row m-2">
+        <div class="position-relative start-0 p-3">
+          <img id="ImagenPerfil" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="rounded mx-auto d-block" alt="..." width="200" height="200">
+        </div>
+        
+        <div class="col pb-2">
+          <div>
+            <label for="Primer-Nombre" class="form-label p-2">Primer Nombre</label>
+            <input type="text"class="form-control mb-2"id="Primer-Nombre" required>
+            <div class="invalid-feedback">
+              Debe introducir un nombre
+            </div>
+          </div>
+          <div>
+            <label for="Primer-Apellido" class="form-label p-2">Primer Apellido</label>
+            <input type="text"class="form-control mb-2"id="Primer-Apellido" required>
+            <div class="invalid-feedback">
+              Debe introducir un apellido.
+            </div>
+          </div>
+          <div>
+          </div>
+        </div>
+        <div class="col pb-2">
+          <div>
+            <label for="Segundo-Nombre" class="form-label p-2">Segundo Nombre</label>
+            <input type="text"class="form-control mb-2"id="Segundo-Nombre">
+          </div>
+          <div>
+            <label for="Segundo-Apellido" class="form-label p-2">Segundo Apellido</label>
+            <input type="text"class="form-control mb-2"id="Segundo-Apellido">
+          </div>
+        </div>
+        <div class="col pb-2">
+           <div>
+            <label for="Correo-electronico" class="form-label p-2">Correo electronico</label>
+            <input type="text"class="form-control mb-2 " id="Correo-electronico" required>
+            <div class="invalid-feedback">
+              Debe introducir un correo electronico.
+            </div>
+          </div>
+          <div>
+            <label for="Telefono-de-contacto" class="form-label p-2">Telefono</label>
+            <input type="text"class="form-control mb-2" id="Telefono-de-contacto">
+          </div>
+        </div>
+        <div class="col">
+          <div>
+           <label for="Usuario" class="form-label p-2">Usuario</label>
+           <input type="text"class="form-control mb-2" id="Usuario" required>
+           <div class="invalid-feedback">
+            Debe introducir un usuario.
+          </div>
+         </div>
+       </div>
       </div>
-    </div>
+      <div class="w-25  start-0">
+        <label for="Imagen-perfil" class="form-label">Seleccionar imagen de perfil</label>
+        <input class="form-control" type="file" id="Imagen-perfil">
+      </div>
+      <button type="submit" class="btn-primary btn-lg mt-5"id="btnCambios">Aceptar cambios</button>
+      </form>
+  
   </main>
   <footer class="text-muted">
     <div class="container">

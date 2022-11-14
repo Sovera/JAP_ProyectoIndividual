@@ -90,26 +90,53 @@ document.getElementById("metodoTransferencia").style.display="block"
 document.getElementById("metodoTarejeta").style.display="none"
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
-    (() => {
-    'use strict'
-      
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
-  
-    // Loop over them and prevent submission
-    Array.from(forms).forEach(form => {
-      form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-  
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
+function confirmarMetodoPago(){
+    let numTarjeta=document.getElementById("NumTarjeta").value
+    let CodSeg=document.getElementById("NumSeguridad").value
+    let Ven=document.getElementById("VenTarjeta").value
+    let numCuenta=document.getElementById("NumCuenta").value
 
+    if(document.getElementById("Tarjeta").checked===true){
+       if(numTarjeta.length==0 || CodSeg.length==0 || Ven.length==0){
+        document.getElementById("MetodoPagoValid").style.display="none"
+        document.getElementById("MetodoPagoInvalid").style.display="block"
+        document.getElementById('metodoDePago').classList.remove('btn-outline-success');
+        document.getElementById('metodoDePago').classList.add('btn-outline-danger');
+        return false
+       }else{
+        document.getElementById("MetodoPagoValid").style.display="block"
+        document.getElementById("MetodoPagoInvalid").style.display="none"
+        document.getElementById('metodoDePago').classList.add('btn-outline-success');
+        document.getElementById('metodoDePago').classList.remove('btn-outline-danger');
+        return true
+       }
+    }else
+    if(document.getElementById("Transferencia").checked===true){
+        if(numCuenta.length==0){
+            document.getElementById("MetodoPagoValid").style.display="none"
+            document.getElementById("MetodoPagoInvalid").style.display="block"
+            document.getElementById('metodoDePago').classList.remove('btn-outline-success');
+            document.getElementById('metodoDePago').classList.add('btn-outline-danger');
+            return false
+           }else{
+            document.getElementById("MetodoPagoValid").style.display="block"
+            document.getElementById("MetodoPagoInvalid").style.display="none"
+            document.getElementById('metodoDePago').classList.add('btn-outline-success');
+            document.getElementById('metodoDePago').classList.remove('btn-outline-danger');
+            return true
+           }
+
+    }
+    else{
+        document.getElementById("MetodoPagoValid").style.display="none"
+        document.getElementById("MetodoPagoInvalid").style.display="block"
+        document.getElementById('metodoDePago').classList.remove('btn-outline-success');
+        document.getElementById('metodoDePago').classList.add('btn-outline-danger');
+        return false
+       }
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
 
     let codigoUser="25801";
     let url=CART_INFO_URL+codigoUser+EXT_TYPE;
@@ -138,6 +165,40 @@ document.addEventListener("DOMContentLoaded",()=>{
             calcularSubtotalCarrito(productsCarrito);
         });
         document.getElementById("Comprar").addEventListener("click", function(){
-            
+            confirmarMetodoPago();
+        });
+        document.getElementById("GuardarModal").addEventListener("click", function(){
+            confirmarMetodoPago();
+        });
+        document.getElementById("Comprar").addEventListener("click", function(){
+             (() => {
+                
+                'use strict'
+                  
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                const forms = document.querySelectorAll('.needs-validation')
+              
+                // Loop over them and prevent submission
+                Array.from(forms).forEach(form => {
+                  form.addEventListener('submit', event => {
+                    if (!form.checkValidity() || confirmarMetodoPago()==false) {
+                      event.preventDefault()
+                      event.stopPropagation()
+                      
+                    }else{
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Compra finalizada',
+                            text: 'Su compra a sido realizada con exito!',
+                            showConfirmButton: false,
+                            timer:2500
+                          })
+                          event.preventDefault();
+                    }
+              
+                    form.classList.add('was-validated')
+                  }, false)
+                })
+            })()
         });
     })
