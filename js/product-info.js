@@ -87,6 +87,40 @@ document.getElementById("containerRelacionados").innerHTML= htmlContentToAppend;
 }
 }
 
+function AñadirAlCarro(producto){
+  let image=producto.images[0]
+  let name=producto.name
+  let cost=producto.cost
+  let currency=producto.currency
+
+if (localStorage.getItem("carrito") === null) {
+  let Carrito=[
+    {
+      "image":image,
+      "name":name,
+      "unitCost":cost,
+      "currency":currency,
+      "count":1
+    }
+  ]
+  localStorage.setItem("carrito", JSON.stringify(Carrito));
+}else{
+  let Carrito = JSON.parse(localStorage.getItem("carrito"))
+  let productoNew = 
+  {
+    "image":image,
+    "name":name,
+    "unitCost":cost,
+    "currency":currency,
+    "count":1
+   }
+   
+   Carrito.push(productoNew);
+   localStorage.setItem("carrito", JSON.stringify(Carrito));
+}
+
+}
+
 function setProduID(id) {
   localStorage.setItem("productID", id);
   window.location = "product-info.html";
@@ -128,5 +162,21 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("enviarComen").addEventListener("click", function() {
     MandarComentario();
     MostrarComentarios(productsComents);
+  });
+  document.getElementById("AñadirAlCarro").addEventListener("click", function() {
+    AñadirAlCarro(productsInfo);
+    Swal.fire({
+      title: 'Producto Añadido al carrito',
+      text: '¿Desea seguir comprando?',
+      showDenyButton: true,
+      confirmButtonText: 'Seguir comprando',
+      denyButtonText: `No, ir a mi carrito`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location="products.html";
+      } else if (result.isDenied) {
+        window.location="cart.html";
+      }
+    })
   });
 });

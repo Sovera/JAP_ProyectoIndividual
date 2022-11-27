@@ -1,16 +1,66 @@
 let productsCarrito = [];
 let precioTotal=0;
+let carrito=JSON.parse(localStorage.getItem("carrito"));
 
 
 function cargarCarrito(array){
+
+if(array.length>0){
     let htmlContentToAppend = "";
     let htmlContentToAppend2 = "";
 
     for(let i = 0; i < array.length; i++){ 
-        let productsCarrito = array[i];
+document.getElementById("PrecioEnvio").innerHTML=0.00;
+let productsCarrito = array[i];
+if(productsCarrito.currency!="USD"){
+let dolar=0.026
+let costo=productsCarrito.unitCost
+let resultado=costo*dolar.toFixed(2);
+
         htmlContentToAppend += `
         <div class="card p-4">
-        <h2 class="py-4 font-weight-bold">Carrito</h2>
+        <div class="row">
+        <div class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
+        <img src="`+ productsCarrito.image +`" class="img-fluid" alt="cart img">
+        </div>
+        <div class="col-md-7 col-11 mx-auto px-4 mt-2">
+        <div class="row">
+        <div class="col-6 card-title">
+        <h1 class="mb-4 product_name">`+ productsCarrito.name +`</h1>
+        </div>
+        <div class="col-6">
+        <ul class="pagination justify-content-end set_quantity">
+        <li class="page-item"><input type="number" name="" class="page-link" min="1"  value="`+ productsCarrito.count +`" id="textbox`+ i +`" onchange="calcularSubtotal('`+ i +`','`+ resultado +`')">
+        </li>
+        </li>
+        </ul>
+        </div>
+        </div>
+        <div class="row justify-content-between">
+        <div class="justify-content-start">
+        <div class="col-4 d-flex justify-content-start price_money">
+        <h5> USD&nbsp;<span id="itemval`+ i +`">`+ resultado +` </span></h5>
+        </div>
+        </div>
+        <div class="col-4 d-flex">
+        <button class="btn btn-danger" onclick="borrarProducto('`+ i +`')">Borrar</button>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <hr/>
+        `
+
+        htmlContentToAppend2 += `<li><p><span class="font-weight-bold">`+ productsCarrito.name +`:</span>
+                                <span id="currency`+ i +`">USD&nbsp;</span><span id="productoTotal`+ i +`">`+ resultado +`</span></p></li>`
+        
+        document.getElementById("montoDeProductos").innerHTML = htmlContentToAppend2;
+        document.getElementById("ContenedorProductos").innerHTML = htmlContentToAppend;
+
+}else{
+        htmlContentToAppend += `
+        <div class="card p-4">
         <div class="row">
         <div class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
         <img src="`+ productsCarrito.image +`" class="img-fluid" alt="cart img">
@@ -28,9 +78,14 @@ function cargarCarrito(array){
         </ul>
         </div>
         </div>
-        <div class="row">
+        <div class="row justify-content-between">
+        <div class="justify-content-start">
         <div class="col-4 d-flex justify-content-start price_money">
         <h5>`+ productsCarrito.currency+ `&nbsp;<span id="itemval`+ i +`">`+ productsCarrito.unitCost +` </span></h5>
+        </div>
+        </div>
+        <div class="col-4 d-flex">
+        <button class="btn btn-danger" onclick="borrarProducto('`+ i +`')">Borrar</button>
         </div>
         </div>
         </div>
@@ -39,15 +94,27 @@ function cargarCarrito(array){
         <hr/>
         `
 
-        htmlContentToAppend2 += `<p>`+ productsCarrito.name +`</p>
-                                <p>`+ productsCarrito.currency+ ` <span id="productoTotal`+ i +`">`+ productsCarrito.unitCost +`</span></p>`
+        htmlContentToAppend2 += `<li><p><span class="font-weight-bold">`+ productsCarrito.name +`:</span>
+                                <span id="currency`+ i +`">`+ productsCarrito.currency+ `</span> <span id="productoTotal`+ i +`">`+ productsCarrito.unitCost +`</span></p></li>`
         
         document.getElementById("montoDeProductos").innerHTML = htmlContentToAppend2;
-        document.getElementById("ContenedorProductos").innerHTML = htmlContentToAppend; 
+        document.getElementById("ContenedorProductos").innerHTML = htmlContentToAppend;
+} 
     }
+}
+else{
+    htmlContentToAppend = ``
+    htmlContentToAppend2 = ``
+    document.getElementById("montoDeProductos").innerHTML = htmlContentToAppend2;
+    document.getElementById("ContenedorProductos").innerHTML = htmlContentToAppend;
+    document.getElementById("SubtotalCarrito").innerHTML=0.00;
+    document.getElementById("PrecioEnvio").innerHTML=0.00;
+    
+}
 }
 
 function calcularSubtotal(item,precio){
+
 let textbox= "textbox"+item;
 let productoTotal= "productoTotal"+item;
 let unidad= document.getElementById(textbox).value
@@ -55,28 +122,40 @@ let precioTotal= precio * parseInt(unidad);
 let htmlContentToAppend2 = precioTotal;
 document.getElementById(productoTotal).innerHTML = htmlContentToAppend2;
 calcularSubtotalCarrito(productsCarrito)
+
+}
+
+function borrarProducto(i){
+    productsCarrito.splice(i, 1);
+    cargarCarrito(productsCarrito)
+    calcularSubtotalCarrito(productsCarrito)
+    localStorage.setItem("carrito", JSON.stringify(productsCarrito));
+
+    
 }
 
 function calcularSubtotalCarrito(array){ 
+    let precioTotal=0
+
     for(let i = 0; i < array.length; i++){
-        precio=document.getElementById("productoTotal"+i).textContent
-        precioInt= parseInt(precio)
-        precioTotal=0
+        let precio=document.getElementById("productoTotal"+i).textContent;
+        let precioInt= parseFloat(precio)
         precioTotal= precioInt+precioTotal
+        parseFloat(precioTotal);
         document.getElementById("SubtotalCarrito").innerHTML=precioTotal
     }
     if(document.getElementById("Premium").checked===true){
     precioTotal=precioTotal+precioTotal*(15/100)
-    document.getElementById("SubtotalCarrito").innerHTML=precioTotal
-    document.getElementById("PrecioEnvio").innerHTML=precioTotal*(15/100)
+    document.getElementById("SubtotalCarrito").innerHTML=(precioTotal).toFixed(2)
+    document.getElementById("PrecioEnvio").innerHTML=(precioTotal*(15/100)).toFixed(2)
     }if(document.getElementById("Express").checked===true){
         precioTotal=precioTotal+precioTotal*(7/100)
-        document.getElementById("SubtotalCarrito").innerHTML=precioTotal
-        document.getElementById("PrecioEnvio").innerHTML=precioTotal*(7/100)
+        document.getElementById("SubtotalCarrito").innerHTML=(precioTotal).toFixed(2)
+        document.getElementById("PrecioEnvio").innerHTML=(precioTotal*(7/100)).toFixed(2)
     }if(document.getElementById("Standard").checked===true){
         precioTotal=precioTotal+precioTotal*(5/100)
-        document.getElementById("SubtotalCarrito").innerHTML=precioTotal
-        document.getElementById("PrecioEnvio").innerHTML=precioTotal*(5/100)
+        document.getElementById("SubtotalCarrito").innerHTML=(precioTotal).toFixed(2)
+        document.getElementById("PrecioEnvio").innerHTML=(precioTotal*(5/100)).toFixed(2)
     }
     }
 
@@ -137,13 +216,13 @@ function confirmarMetodoPago(){
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
-
     let codigoUser="25801";
     let url=CART_INFO_URL+codigoUser+EXT_TYPE;
     getJSONData(url).then(function(resultObj){
         if (resultObj.status === "ok")
             {
                 productsCarrito = resultObj.data.articles;
+                productsCarrito = productsCarrito.concat(carrito);
                 cargarCarrito(productsCarrito);
                 calcularSubtotalCarrito(productsCarrito);
             }

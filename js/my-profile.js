@@ -1,3 +1,6 @@
+
+
+//variable del local storage steadas
 let PrimerNombreLocal=localStorage.getItem("PrimerNombre");
 let PrimerApellidoLocal=localStorage.getItem("PrimerApellido");
 let SegundoNombreLocal=localStorage.getItem("SegundoNombre");
@@ -7,6 +10,7 @@ let TelefonoLocal=localStorage.getItem("Telefono");
 let UsuarioLocal=localStorage.getItem("user");
 let objectURL=localStorage.getItem("perfil");
 
+//variables de los input, sin valor asignado todavia
 let PrimerNombre
 let PrimerApellido
 let SegundoNombre
